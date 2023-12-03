@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Storage</title>
+</head>
+
+<body>
+    <div>
+        <input type="text" name="" id="input-id" placeholder="input-id">
+        <input type="text" name="" id="input-value" placeholder="input-value">
+        <br>
+        <input type="button" value="Add to LocalStorage" onclick="addToLocalStorage()">
+        <br>
+        <input type="button" value="Set Array" onclick="setArray()">
+        <br>
+        <input type="button" value="Set Object" onclick="setObject()">
+    </div>
+    <div>
+        <h3>Name: <span id="get-name"></span></h3>
+        <h3>Age: <span id="get-age"></span></h3>
+    </div>
+    <script>
+        const addToLocalStorage = () => {
+            const inputId = document.getElementById('input-id');
+            const inputValue = document.getElementById('input-value');
+            const id = inputId.value;
+            const value = inputValue.value;
+
+            if (id && value) {
+                localStorage.setItem(id, value);
+                inputId.value = '';
+                inputValue.value = '';
+            }
+        }
+        const setArray = () => {
+            const numbers = [10, 20, 30, 40, 50, 60];
+            const stringifyedArrey = JSON.stringify(numbers);
+            localStorage.setItem('array', stringifyedArrey);
+        };
+        const setObject = () => {
+            const students = { name: 'Sajal Hossain', age: 30 };
+            const stringifyedObj = JSON.stringify(students);
+            localStorage.setItem('object', stringifyedObj);
+        };
+        const getObject = () => {
+            const name = document.getElementById('get-name');
+            const age = document.getElementById('get-age');
+            const getObj = localStorage.getItem('object');
+            const students = JSON.parse(getObj);
+            name.innerText = students.name;
+            age.innerText = students.age;
+        };
+        getObject();
+    </script>
+</body>
+
+</html>
